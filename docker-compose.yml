@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  tictactoe.api:
+    image: ${DOCKER_REGISTRY-}tictactoeapi
+    build:
+      context: .
+      dockerfile: TicTacToe.Api/Dockerfile
+    
+    ports:
+     - "3200:80"
