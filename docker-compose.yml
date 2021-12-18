@@ -8,4 +8,5 @@ services:
       dockerfile: TicTacToe.Api/Dockerfile
     
     ports:
-     - "3200:80"
+     - "32000:80"
+     - "32005:480"
