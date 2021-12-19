@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,10 +37,12 @@ namespace TicTacToe.Models.Entities
 
 
         // The bool that returns true in the case that the game ends in a draw
+        [Required]
         public bool Draw { get; set; }
 
         // The bool that returns true once the game is over,
         // either in the victory of a Player or in a draw
+        [Required]
         public bool Completed { get; set; }
 
         // The player that wins the game

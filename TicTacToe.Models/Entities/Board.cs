@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -21,9 +22,11 @@ namespace TicTacToe.Models.Entities
         // Below are the properties of a Board Entity
 
         // The number of collums the game is played within
+        [Required]
         public int NumberOfColumns { get; set; }
 
         // The number of rows the game is played within
+        [Required]
         public int NumberOfRows { get; set; }
 
         // The free spaces within the board (unused spaces)

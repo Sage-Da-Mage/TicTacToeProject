@@ -1,31 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TicTacToe.Models.Entities
+namespace TicTacToe.Models.Entities.VMs.MoveVMs
 {
-    // A move done on a board for a game of TicTacToe 
-    // (Usually seen as placing an X or an O on one of the free positions)
-    public class Move : BasicEntity
+    // The View Model for the Move Entity, used for the creation and viewing of Move Entities
+
+    public class MoveVM
     {
-
-        // An empty constructor for the creation of an empty Move Entity
-        public Move()
-        {
-
-        }
-
-        // Below are the properties belonging to the Move Entity
-
         // This is the position on the board this move was done on
-        [Required]
         public int MovePosition { get; set; }
 
         // This is the Id of the board that the move takes place on
-        [Required]
         public Guid BoardId { get; set; }
 
         // This is a navigational property for the board the move is on
@@ -33,6 +21,7 @@ namespace TicTacToe.Models.Entities
 
         // This is a navigational property to identify who made the move
         public Player MoveMadeBy { get; set; }
+
 
     }
 }
