@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TicTacToe.Service\TicTacToe.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
