@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
         }
 
         // This is the constructor for creating a GameVM from a Game Entity
-        public GameVM(Game src)
+        public GameVM(Entities.Game src)
         {
             
             Draw = src.Draw;

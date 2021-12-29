@@ -27,15 +27,14 @@ namespace TicTacToe.Service.Services
 
         public async Task<GameVM> Create(GameCreateVM src)
         {
-            // Generate a new Entity with the inputted data
-            
-            
+            // Generate a new Entity with the inputted data            
             var newEntity = new Game(src);
 
 
 
             // Use that data to create the new Game
-            var result = await _gameRepository.Create(newEntity);
+            var result = new Game(); 
+            //var result = await _gameRepository.Create(newEntity);
 
             // Create a GameVM from the result to return/show
             var model = new GameVM(result);
@@ -44,20 +43,20 @@ namespace TicTacToe.Service.Services
             return model;
         }
 
-        // Get an Game by its EmployeeId
-        public async Task<GameVM> Get(int EmployeeId)
+        // Get an Game by its GameId
+        /*public async Task<GameVM> Get(Guid gameId)
         {
 
             // Get the Game entitiy from the repository
-            var result = await _gameRepository.Get(EmployeeId);
+            var result = await _gameRepository.Get(gameId);
 
-            // Create the EmployeeVm that we will return
+            // Create the GameVM that we will return
             var model = new GameVM(result);
 
             // Return the Game VM in a 200 response
             return model;
 
-        }
+        }*/
 
         // Modified GetAll after switching to database implementation
         public async Task<List<GameVM>> GetAll()
@@ -66,20 +65,21 @@ namespace TicTacToe.Service.Services
             var results = await _gameRepository.GetAll();
 
             // Build the Game view models to return to the client
-            var models = results.Select(employee => new GameVM(employee)).ToList();
+            var models = results.Select(game => new GameVM(game)).ToList();
 
             // Return the GameVMs
             return models;
         }
 
-        public async Task<GameVM> Update(GameUpdateVM src, int employeeId)
+        public async Task<GameVM> Update(GameUpdateVM src)
         {
 
             // Make the repository update the Game
             var updateData = new Game(src);
-            var result = await _gameRepository.Update(updateData, employeeId);
 
-            //Create the EmployeeVm model for returning to the client
+            var result = await _gameRepository.Update(updateData);
+
+            //Create the GameVM model for returning to the client
             var model = new GameVM(result);
 
             //Finally return the GameVM to show that the change was sucessfull

@@ -35,6 +35,9 @@ namespace TicTacToe.Models.Entities
 
         // Below are the properties of a Game Entity
 
+        // Id for differenciating games (having issues with using BasicEntity)
+        //[Key]
+        //public Guid Id { get; set; }
 
 
         // The bool that returns true in the case that the game ends in a draw
