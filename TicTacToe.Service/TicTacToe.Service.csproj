@@ -9,8 +9,4 @@
     <ProjectReference Include="..\TicTacToe.Repository\TicTacToe.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

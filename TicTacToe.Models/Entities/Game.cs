@@ -36,12 +36,14 @@ namespace TicTacToe.Models.Entities
         // Below are the properties of a Game Entity
 
 
+
         // The bool that returns true in the case that the game ends in a draw
         [Required]
         public bool Draw { get; set; }
 
         // The bool that returns true once the game is over,
         // either in the victory of a Player or in a draw
+        // (This is important for later endpoints where we check for current games played)
         [Required]
         public bool Completed { get; set; }
 

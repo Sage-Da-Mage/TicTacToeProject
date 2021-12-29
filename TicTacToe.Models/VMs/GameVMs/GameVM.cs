@@ -8,9 +8,24 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
 {
 
     // The View Model for the Game Entity, used for the creation and viewing of Game Entities
-
     public class GameVM
     {
+        // This is the default constructor for generating empty GameVMs
+        public GameVM ()
+        {
+
+        }
+
+        // This is the constructor for creating a GameVM from a Game Entity
+        public GameVM(Game src)
+        {
+            
+            Draw = src.Draw;
+            Completed = src.Completed;
+            Victor = src.Victor;
+            InitializedBoard = src.InitializedBoard;
+        }
+
         // The bool that returns true in the case that the game ends in a draw
         public bool Draw { get; set; }
 
