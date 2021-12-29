@@ -19,7 +19,7 @@ namespace TicTacToe.Models.Entities
         public DateTime CreatedAt { get; set; }
 
         // The DateTime which the entity was updated
-        public DateTime UpdatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
 
 
     }

@@ -30,6 +30,10 @@ namespace TicTacToe.Service.Services
             // Generate a new Entity with the inputted data            
             var newEntity = new Game(src);
 
+            // Set the Completed booleans to false (Game is just started there is no winner, tie or victor)
+            newEntity.Completed = false;
+            newEntity.Draw = false;
+            newEntity.Victor = null;
 
 
             // Use that data to create the new Game

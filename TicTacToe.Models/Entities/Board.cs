@@ -21,17 +21,11 @@ namespace TicTacToe.Models.Entities
 
         // Below are the properties of a Board Entity
 
-        // The number of collums the game is played within
-        [Required]
-        public int NumberOfColumns { get; set; }
-
-        // The number of rows the game is played within
-        [Required]
-        public int NumberOfRows { get; set; }
-
-        // The free spaces within the board (unused spaces)
-        [NotMapped]
-        public IList<int> FreeSpaces { get; set; }
+        // A TicTacToe board is a 3x3 set of tiles all initially empty
+        // An empty tile is represented by a 3
+        // A tile used by Player 1 is represented by a 1
+        // A tile used by Player 2 is represented by a 2
+        public List<int> BoardList { get; set; }
 
     }
 }

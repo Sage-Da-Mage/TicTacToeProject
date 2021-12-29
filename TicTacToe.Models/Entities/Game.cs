@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TicTacToe.Models.VMs.GameVMs;
 
 namespace TicTacToe.Models.Entities
 {
@@ -15,16 +16,28 @@ namespace TicTacToe.Models.Entities
 
         }
 
-        // This constructor takes in a TicTacToe Board and sets it up for the start of a game
-        public Game(Board board)
+        // This constructor takes in a GameVM to construct a Game
+        public Game(GameCreateVM src )
         {
-            Completed = false;
-            
-            // Setup a default board (pre-game state) here using the passed in board (likely done in the service layer)
-
-            // initializedBoard = board;
-
+            Draw = src.Draw;
+            Completed = src.Completed;
+            Victor = src.Victor;
+            InitializedBoard = src.InitializedBoard;
+            // Set the time of the Games creation to the current time
+            CreatedAt = DateTime.UtcNow;
         }
+
+        // This constructor takes in a GameUpdateVM to update a Game
+        public Game(GameUpdateVM src)
+        {
+            Draw = src.Draw;
+            Completed = src.Completed;
+            Victor = src.Victor;
+            InitializedBoard = src.InitializedBoard;
+            // Set the most recent update time to the current time
+            LastUpdatedAt = DateTime.UtcNow; 
+        }
+
 
         // Return the completed variable (for once a game is completed)
         public bool IsCompleted()
