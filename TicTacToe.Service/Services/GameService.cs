@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities;
 using TicTacToe.Models.Entities.VMs.GameVMs;
+using TicTacToe.Models.Entities.VMs.MoveVMs;
 using TicTacToe.Models.VMs.GameVMs;
+using TicTacToe.Models.VMs.MoveVMs;
 using TicTacToe.Repository.Repositories.Interfaces;
 using TicTacToe.Service.Interfaces;
 
@@ -22,6 +24,7 @@ namespace TicTacToe.Service.Services
             _gameRepository = gameRepository;
         }
 
+        // Create a new game
         public async Task<GameVM> Create(GameCreateVM src)
         {
             // Generate a new Entity with the inputted data            
@@ -70,7 +73,7 @@ namespace TicTacToe.Service.Services
         }
         
 
-        // Modified GetAll after switching to database implementation
+        // The call for getting all games within the database
         public async Task<List<GameVM>> GetAll()
         {
             // Get the Game entities from the repository
@@ -97,10 +100,174 @@ namespace TicTacToe.Service.Services
             return model;
         }
 
+        // Delete a Game from the Database
         public async Task Delete(Guid inputId)
         {
             // Inform the repository to delete the specified Listing Entity
             await _gameRepository.Delete(inputId);
         }
+
+        // The Move Endpoint for Endpoint 2 of the project
+        // Has the current player choose a tile to mark
+        public async Task<MoveVM> Move(MoveCreateVM inputtedSrc)
+        {
+            // If the tile that the move is for is non-valid ( # < 0 || # > 8) retern an exception
+            if(inputtedSrc.TileSelected < 0 || inputtedSrc.TileSelected > 8)
+            {
+                // Throw an exception, needs to be added yet
+                // throw new insertException("The selected tile is invalid, select a tile placement between 0 (top-left) and 8 (bottom-right)")
+            }
+
+            // Get the Game the move is for from the Database
+            var result = await _gameRepository.Get(inputtedSrc.GameId);
+
+            // Determine whether the game has been won already (error/exception catching)
+            if(result.Completed == true)
+            {
+                // Throw an exception, needs to be added still
+                // throw new insertException("This game has already been completed, you can't take another move.")
+            }
+
+            // Determine which player gets to go: true = p1s turn, false = p2s turn
+            bool doesStartingPlayerGo = P1Go(result.BoardList);
+
+            // The line below determines if the player determined above is valid and assigns the int
+            // to place in the boardList based on which player it is (1 = P1, 2 = P2)
+            int whichPlayerMark = PlayerValidCheckPlusIntAssignment(result, inputtedSrc.PlayerId, doesStartingPlayerGo);
+
+            // Determine if the desired tile of the boardList is empty (check for invalid move)
+            // If the tile chosen is not 3 it isn't a valid move
+            if (result.BoardList[inputtedSrc.TileSelected] != 3)
+            {
+                // Throw an exception, needs to be added still
+                //throw new insertanInvalidMoveExceptionHere("The selected Tile is not available for a move");
+            }
+
+            // Add a mark to the boardList (Getting here means it was a valid move)
+            result.BoardList[inputtedSrc.TileSelected] = whichPlayerMark;
+
+            // Determine whether there is a winner of the game as a result of this move
+            result.Completed = DoesThisMoveWin(result.BoardList, whichPlayerMark);
+
+
+            // Now determine if the move won the game
+            if (result.Completed == true)
+            {
+                //set winner's id
+                if (doesStartingPlayerGo)
+                {
+                    result.Victor = result.PlayerStarting;
+                }
+                else
+                {
+                    var GameWinner = result.GameHubs.Where(GameWinner => GameWinner.PlayerId != result.PlayerStarting).First();
+                    result.Victor = GameWinner.PlayerId;
+                }
+            }
+
+            // Determine whether this move (that did not win) was also the last available Tile to use
+            // If there is no tile in the list which is the integer 3, then there are no available tiles left to use and the game is a draw
+            if (!result.BoardList.Contains(3))
+            {
+                result.Completed = true;
+                result.Draw = true; 
+            }
+
+            // Save the Move done on the Game (if reached this point it has succeeded and was valid)
+            var moveResult = await _gameRepository.Update(result, result.Id);
+
+
+            // Determine the results of the turn for returning the MoveVM 
+            bool gameDone = false;
+            bool gameWon = false;
+            if(result.Completed == true) { gameDone = true; }
+            if (result.Draw == false) { gameWon = true; }
+
+            // Return a MoveVM which displays whether the game is completed and whether there was a victor
+            var model = new MoveVM(gameDone, gameWon);
+
+            // Return the model with the results dependant on what the move accomplished (Draw, Victor, Game Continues)
+            return model;
+
+        }
+
+
+
+        // This method is used in the move endpoint to determine which player gets to go:
+        private bool P1Go(List<int> boardList)
+        {
+            // Count the number of times each player has gone (x=p1, o=p2)
+            int x = boardList.Count(x => x == 1);
+            int o = boardList.Count(o => o == 2);
+
+            // If x==o then it is player 1s turn again (both players have gone the same amount)
+            if (x == o) return true;
+
+            // If x != o then player 1 has gone more times than player 2 and it is player 2s turn
+            return false;
+        }
+
+        // This method is used in the move endpoint to determine if the player whose turn is determined in p1Go is valid to play
+        private int PlayerValidCheckPlusIntAssignment(Game game, Guid playerId, bool playerGoing)
+        {
+            // Is the player we pass in from the inputtedSrc a valid player in this game?
+            if (game.GameHubs.FirstOrDefault(i => i.PlayerId == playerId) == null)
+            {
+                // Add Exception here (no exceptions implemented yet)
+                // throw new NotFoundException("The requested player is not found for this game");
+            }
+            // Determine if the passed in player is P1 
+            if (game.PlayerStarting == playerId)
+            {
+                // If they are P1, determine if it is their turn
+                if (playerGoing == false)
+                {
+                    // Add Exception here (no exceptions implemented yet)
+
+                    // If the player passed in is P1 but isn't the playerGoing then this isn't thier turn and they can't go, return exception
+                    //throw new insertanInvalidMoveExceptionHere("It is not the requested players turn");
+                }
+                // If the passed in player is P1 and the playerGoing indicates it is P1s turn, then return 1 (P1s mark)
+                else return 1;
+            }
+            // If we reach this part of the method then the Player is P2
+            if (playerGoing == true)
+            {
+                // Add an Exception here (no exception implementations yet)
+                // If the playerGoing is true then it is P1s turn, therefore it isn't the passed in players turn. Return an exception.
+                // throw new insertanInvalidMoveExceptionHere("It is not the requested players turn");
+            }
+            // If the passed in player is P2 and the playerGoing indicates it is P2s turn, then retunr 2 (P2s mark)
+            return 2;
+        }
+
+        // This method is used in the move endpoint to determine whether the move which just completed wins the game or not
+        private bool DoesThisMoveWin(List<int> boardList, int playerMakingMove)
+        {
+            // We check if there is a win by determining if there is 3 of the playerMakingMove in a row vertically, horizontally or diagonally
+            // The board is 3 tiles in any of the 3 ways so if the sum of a row/collumn/diagonal is EXACTLY = (playerMakingMove * 3) then it is a winning move.
+            int winningValue = playerMakingMove * 3;
+
+
+            // Determine if the move wins via a Horizontal line
+            if (boardList[0] + boardList[1] + boardList[2] == winningValue) return true;
+            if (boardList[3] + boardList[4] + boardList[5] == winningValue) return true;
+            if (boardList[6] + boardList[7] + boardList[8] == winningValue) return true;
+
+
+            // Determine if the move wins via a Vertical line
+            if (boardList[0] + boardList[3] + boardList[6] == winningValue) return true;
+            if (boardList[1] + boardList[4] + boardList[7] == winningValue) return true;
+            if (boardList[2] + boardList[5] + boardList[8] == winningValue) return true;
+
+
+            // Determine if the move wins via a Diagonal line
+            if (boardList[6] + boardList[4] + boardList[2] == winningValue) return true;
+            if (boardList[8] + boardList[4] + boardList[0] == winningValue) return true;
+
+            // If none of the above has triggered(returned true) then the move didn't win the game and we return false
+            return false;
+        }
+
     }
 }

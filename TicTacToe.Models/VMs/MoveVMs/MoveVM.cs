@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +17,11 @@ namespace TicTacToe.Models.Entities.VMs.MoveVMs
         }
 
         // The constructor for generating a moveVM model
-        public MoveVM(bool GameCompleted, bool WinningTurn)
+        public MoveVM(bool gameCompleted, bool winningTurn)
         {
 
+            GameCompleted = gameCompleted;
+            WinningTurn = winningTurn;
         }
 
         // Properties of a MoveVM below
@@ -28,7 +29,7 @@ namespace TicTacToe.Models.Entities.VMs.MoveVMs
         // BUT IF I DETERMINE IF THE GAME IS OVER AS PART OF A MOVE I MAY WANT THEM IN HERE
 
         // Determines if the game is over, this is true if there is a victor or if there is a draw
-        public bool GameOver { get; set; }
+        public bool GameCompleted { get; set; }
 
         // The winning turn is true if a player wins the game with this turn
         public bool WinningTurn { get; set; }

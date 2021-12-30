@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities.VMs.GameVMs;
+using TicTacToe.Models.Entities.VMs.MoveVMs;
 using TicTacToe.Models.VMs.GameVMs;
+using TicTacToe.Models.VMs.MoveVMs;
 
 namespace TicTacToe.Service.Interfaces
 {
@@ -23,8 +25,11 @@ namespace TicTacToe.Service.Interfaces
         // Delete a Game
         Task Delete(Guid gameId);
 
-        // Get all of the Games currently existing (CC required)
+        // Get all of the Games currently existing
         public Task<List<GameVM>> GetAll();
+
+        public Task<MoveVM> Move(MoveCreateVM inputtedSrc);
+
 
     }
 }

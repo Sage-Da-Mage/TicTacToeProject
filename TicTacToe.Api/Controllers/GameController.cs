@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities.VMs.GameVMs;
+using TicTacToe.Models.Entities.VMs.MoveVMs;
 using TicTacToe.Models.VMs.GameVMs;
+using TicTacToe.Models.VMs.MoveVMs;
 using TicTacToe.Service.Interfaces;
 
 namespace TicTacToe.Api.Controllers
@@ -61,6 +63,19 @@ namespace TicTacToe.Api.Controllers
 
             return results;
         }
+
+
+
+        // This endpoint takes in a MoveCreateVm (GameID + PlayerWhosTurnItIsId + Tile to select) 
+        [HttpPost]
+        [Route("move")]
+        public async Task<ActionResult<MoveVM>> Move([FromBody] MoveCreateVM data)
+        {
+            var result = await _gameService.Move(data);
+            return Ok(result);
+        }
+
+
 
         /*
         // Get the number of games currently active (not completed)

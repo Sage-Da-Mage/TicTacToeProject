@@ -65,7 +65,7 @@ namespace TicTacToe.Models.Entities
 
         // The player that wins the game
         // (not necessarily going to exist in all games as some will end in a draw [no winner])
-        public Player? Victor { get; set; }
+        public Guid? Victor { get; set; }
 
         // The Board that this specific game takes place on
         // A 3x3 set of tiles represented by numbers in a list of 9 ints
