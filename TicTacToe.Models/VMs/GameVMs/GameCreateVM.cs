@@ -25,7 +25,7 @@ namespace TicTacToe.Models.VMs.GameVMs
 
         // The board that this game is set on.
         [Required]
-        public Board? InitializedBoard { get; set; }
+        public List<int> BoardList { get; set; }
 
 
     }

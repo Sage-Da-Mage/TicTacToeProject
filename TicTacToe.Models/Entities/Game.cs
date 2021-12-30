@@ -16,13 +16,13 @@ namespace TicTacToe.Models.Entities
 
         }
 
-        // This constructor takes in a GameVM to construct a Game
+        // This constructor takes in a GameCreateVM to construct a Game
         public Game(GameCreateVM src )
         {
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
-            InitializedBoard = src.InitializedBoard;
+            BoardList = src.BoardList;
             // Set the time of the Games creation to the current time
             CreatedAt = DateTime.UtcNow;
         }
@@ -33,7 +33,7 @@ namespace TicTacToe.Models.Entities
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
-            InitializedBoard = src.InitializedBoard;
+            BoardList = src.BoardList;
             // Set the most recent update time to the current time
             LastUpdatedAt = DateTime.UtcNow; 
         }
@@ -68,8 +68,7 @@ namespace TicTacToe.Models.Entities
         public Player? Victor { get; set; }
 
         // The Board that this specific game takes place on
-        public Board? InitializedBoard { get; set; }
-       
+        public List<int> BoardList { get; set; }       
 
     }
 }

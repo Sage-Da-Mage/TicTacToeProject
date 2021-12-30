@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities.VMs.GameVMs;
+using TicTacToe.Models.VMs.GameVMs;
 
 namespace TicTacToe.Api.Controllers
 {
@@ -32,11 +33,10 @@ namespace TicTacToe.Api.Controllers
             // The guts of the Create endpoint, make a call to the service layer to do the 
             // mechanics of creating the new game
 
-            // var result = await _gameService.Create(data);
+            var result = await _gameService.Create(data);
 
-            // return Ok(result);
+            return Ok(result);
 
-            return; 
         }
 
 
@@ -47,11 +47,10 @@ namespace TicTacToe.Api.Controllers
             // The guts of the Get endpoint, make a call to the service layer to do the
             // mechanics of getting the requsted game
 
-            // var result = await _gameService.Get(id);
+            var result = await _gameService.Get(id);
 
-            // return Ok(result);
+            return Ok(result);
 
-            return;
         }
 
         // Get all games
@@ -61,11 +60,9 @@ namespace TicTacToe.Api.Controllers
             // The guts of the GetAll endpoint, make a call to the service layer to do the 
             // mechanics of getting every game in the database
 
-            // var results = await _gameService.GetAll();
+            var results = await _gameService.GetAll();
 
-            // return results;
-
-            return;
+            return results;
         }
 
         // Get the number of games currently active (not completed)
@@ -76,11 +73,10 @@ namespace TicTacToe.Api.Controllers
             // mechanics of getting every game in the database and then sorting out any non-active
             // game from that list
 
-            // var results = await _gameService.GetAllActiveGames();
+            var results = await _gameService.GetAllActiveGames();
 
-            // return results;
+            return results;
 
-            return;
         }
     }
 }

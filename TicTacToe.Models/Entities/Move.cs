@@ -20,19 +20,7 @@ namespace TicTacToe.Models.Entities
 
         // Below are the properties belonging to the Move Entity
 
-        // This is the position on the board this move was done on
-        [Required]
-        public int MovePosition { get; set; }
-
-        // This is the Id of the board that the move takes place on
-        [Required]
-        public Guid BoardId { get; set; }
-
-        // This is a navigational property for the board the move is on
-        public Board Board { get; set; }
-
-        // This is a navigational property to identify who made the move
-        public Player MoveMadeBy { get; set; }
+        // GET BACK TO THIS AFTER REWORK FOUNDATIONS ARE COMPLETED!!
 
     }
 }

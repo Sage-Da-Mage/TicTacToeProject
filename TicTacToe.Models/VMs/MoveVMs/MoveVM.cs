@@ -10,18 +10,8 @@ namespace TicTacToe.Models.Entities.VMs.MoveVMs
 
     public class MoveVM
     {
-        // This is the position on the board this move was done on
-        public int MovePosition { get; set; }
-
-        // This is the Id of the board that the move takes place on
-        public Guid BoardId { get; set; }
-
-        // This is a navigational property for the board the move is on
-        public Board Board { get; set; }
-
-        // This is a navigational property to identify who made the move
-        public Player MoveMadeBy { get; set; }
-
+        // TO BE REDONE AFTER/AS PART OF PROJECT REWORK! 
+        // GET BACK TO THIS AFTER FOUNDATIONS OF THE REWORK ARE DONE.
 
     }
 }

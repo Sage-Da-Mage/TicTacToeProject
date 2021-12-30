@@ -24,7 +24,7 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
-            InitializedBoard = src.InitializedBoard;
+            BoardList = src.BoardList;
         }
 
         // The bool that returns true in the case that the game ends in a draw
@@ -39,7 +39,7 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
         public Player? Victor { get; set; }
 
         // The Board that this specific game takes place on
-        public Board? InitializedBoard { get; set; }
+        public List<int> BoardList { get; set; }
 
 
     }

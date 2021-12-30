@@ -30,6 +30,12 @@ namespace TicTacToe.Service.Services
             // Generate a new Entity with the inputted data            
             var newEntity = new Game(src);
 
+
+            // Set the BoardList of the newEntity to be the default TicTacToeBoard
+            List<int> initializeBoard = new List<int> { 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+
+            newEntity.BoardList = initializeBoard;
+
             // Set the Completed booleans to false (Game is just started there is no winner, tie or victor)
             newEntity.Completed = false;
             newEntity.Draw = false;
