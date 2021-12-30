@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TicTacToe.Repository;
 
 namespace TicTacToe.Api
 {
@@ -25,6 +27,17 @@ namespace TicTacToe.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Setup our database using the ApplicationDbContext
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql( // Connect to the postgres database
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    b =>
+                    {
+                        // Configure what project we want to store our Code-First Migrations in
+                        b.MigrationsAssembly("TicTacToe.Repository");
+                    })
+                );
 
             services.AddControllers();
         }
