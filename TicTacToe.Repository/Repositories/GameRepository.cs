@@ -64,7 +64,11 @@ namespace TicTacToe.Repository.Repositories
             src.Id = inputId;
 
             // Get the entity to update
-            var result = await _context.Games.FirstOrDefaultAsync(i => i.Id == src.Id);
+            var result = await _context.Games
+                .FirstOrDefaultAsync(i => i.Id == src.Id);
+
+            // In the case that a game can't be found matching the provided inputId throw an Exception indicating so
+            if (result == null) throw new NotFoundException("The requested game could not be found");
 
 
             // Preform the update on the Game entity

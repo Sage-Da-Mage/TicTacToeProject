@@ -194,6 +194,10 @@ namespace TicTacToe.Service.Services
 
 
 
+        // -------------------------------------------------------------------------------------------------------------------
+        // Below are supplemental methods used in the above methods that are called from endpoints. 
+
+
         // This method is used in the move endpoint to determine which player gets to go:
         private bool P1Go(List<int> boardList)
         {

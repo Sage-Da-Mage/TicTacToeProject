@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities;
 using TicTacToe.Repository.Repositories.Interfaces;
+using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Repository.Repositories
 {
@@ -30,10 +31,16 @@ namespace TicTacToe.Repository.Repositories
 
         }
 
+        // This method is used to confirm that both players are within the database
         public async Task CheckPlayersInSystem(List<Guid> playerIds)
         {
+
             var playerCount = await _context.Players
                 .Where(p => p.Id == playerIds[0] || p.Id == playerIds[1]).CountAsync();
+
+            // If both players are not within the database (playercound is not exactly 2) then throw the NotFoundException
+            if (playerCount != 2) throw new NotFoundException("A requested player could not be found");
+
         }
 
 

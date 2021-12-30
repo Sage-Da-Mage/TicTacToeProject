@@ -9,6 +9,7 @@ using TicTacToe.Models.Entities.VMs.MoveVMs;
 using TicTacToe.Models.VMs.GameVMs;
 using TicTacToe.Models.VMs.MoveVMs;
 using TicTacToe.Service.Interfaces;
+using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Api.Controllers
 {
@@ -29,6 +30,20 @@ namespace TicTacToe.Api.Controllers
         [HttpPost("create")]
         public async Task<ActionResult<GameVM>> Create([FromBody] GameCreateVM data)
         {
+
+            // Verify that only 2 players are passed in
+            if(data.PlayersIds.Count != 2)
+            {
+                return BadRequest(new { message = "You have to have exactly 2 players to play. No more, no less." });
+            }
+
+            // Make sure that one of the two players passed in is the player that starts the game
+            if(data.PlayerStarting != data.PlayersIds[0] && data.PlayerStarting != data.PlayersIds[1])
+            {
+                return BadRequest(new { message = "One of the two players joining must be the assigned 'Starting Player' otherwise, the game won't start." });
+            }
+
+
             // The guts of the Create endpoint, make a call to the service layer to do the 
             // mechanics of creating the new game
 
@@ -43,11 +58,17 @@ namespace TicTacToe.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<GameVM>> Get([FromRoute] Guid id)
         {
+
+
+
             // The guts of the Get endpoint, make a call to the service layer to do the
             // mechanics of getting the requsted game
 
             var result = await _gameService.Get(id);
 
+            // In the case that a game can't be found matching the provided inputId throw an Exception indicating so
+            if (result == null) throw new NotFoundException("The requested game could not be found");
+            
             return Ok(result);
 
         }
