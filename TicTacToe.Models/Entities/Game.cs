@@ -69,7 +69,7 @@ namespace TicTacToe.Models.Entities
 
         // The Board that this specific game takes place on
         // A 3x3 set of tiles represented by numbers in a list of 9 ints
-        // 1= player 1, 2= player 2 & 3 = unused tile
+        // 1= player 1, 2= player 2 & 5 = unused tile
         public List<int> BoardList { get; set; }
 
         // The player (their Id) assigned to start the game of TicTacToe 

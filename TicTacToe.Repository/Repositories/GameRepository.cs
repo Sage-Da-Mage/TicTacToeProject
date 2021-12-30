@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities;
 using TicTacToe.Repository.Repositories.Interfaces;
+using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Repository.Repositories
 {
@@ -33,11 +34,14 @@ namespace TicTacToe.Repository.Repositories
         // Get a single Game by Id
         public async Task<Game> Get(Guid inputId)
         {
+            // Get the game desired from the inputtedId
+            var result = await _context.Games
+                .Include(g => g.GameHubs).FirstOrDefaultAsync(i => i.Id == inputId);
 
-            // Get the Game Entity you are seeking
-            var result = await _context.Games.FirstOrDefaultAsync(i => i.Id == inputId);
-
-            // return the retrieved entry
+            // If it isn't present, throw a NotFoundException
+            if (result == null) throw new NotFoundException("The requested game could not be found");
+            
+            // return the results
             return result;
 
         }

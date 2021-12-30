@@ -33,7 +33,7 @@ namespace TicTacToe.Service.Services
 
 
             // Set the BoardList of the newEntity to be the default TicTacToeBoard
-            List<int> initializeBoard = new List<int> { 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+            List<int> initializeBoard = new List<int> { 5, 5, 5, 5, 5, 5, 5, 5, 5 };
 
             newEntity.BoardList = initializeBoard;
 
@@ -137,8 +137,8 @@ namespace TicTacToe.Service.Services
             int whichPlayerMark = PlayerValidCheckPlusIntAssignment(result, inputtedSrc.PlayerId, doesStartingPlayerGo);
 
             // Determine if the desired tile of the boardList is empty (check for invalid move)
-            // If the tile chosen is not 3 it isn't a valid move
-            if (result.BoardList[inputtedSrc.TileSelected] != 3)
+            // If the tile chosen is not 5 it isn't a valid move
+            if (result.BoardList[inputtedSrc.TileSelected] != 5)
             {
                 // Throw an exception, you can't select a tile that has already been used
                 throw new InvalidMove("The selected Tile is not available for a move");
@@ -167,8 +167,8 @@ namespace TicTacToe.Service.Services
             }
 
             // Determine whether this move (that did not win) was also the last available Tile to use
-            // If there is no tile in the list which is the integer 3, then there are no available tiles left to use and the game is a draw
-            if (!result.BoardList.Contains(3))
+            // If there is no tile in the list which is the integer 5, then there are no available tiles left to use and the game is a draw
+            if (!result.BoardList.Contains(5))
             {
                 result.Completed = true;
                 result.Draw = true; 
@@ -182,7 +182,7 @@ namespace TicTacToe.Service.Services
             bool gameDone = false;
             bool gameWon = false;
             if(result.Completed == true) { gameDone = true; }
-            if (result.Draw == false) { gameWon = true; }
+            if (result.Draw == false && gameDone == true) { gameWon = true; }
 
             // Return a MoveVM which displays whether the game is completed and whether there was a victor
             var model = new MoveVM(gameDone, gameWon);
