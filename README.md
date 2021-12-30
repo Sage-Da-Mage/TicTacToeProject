@@ -7,7 +7,7 @@ This project allows those using it to create and play games of TicTacToe as well
 
 You can make use of this project by cloning it from this GitHub page onto your computer and run it through your IDE of choice (though I used Visual Studio 2019 and would recommend you do it for the most consistency with my experience).
 
-This project supports the use of swagger, use the link: http://localhost:6902/swagger/index.html in your web browser while the program is running and you can access Swagge.
+This project supports the use of swagger, use the link: http://localhost:6902/swagger/index.html in your web browser while the program is running and you can access Swagger.
 
 
 ## **Endpoint 1: Starting A Game**
