@@ -18,13 +18,13 @@ Before you actually start a game itself, you are going to want to create some pl
  
  After doing this, you can create a game by using: http://localhost:6902/api/Game/Create with a JSON string in the body in the format of:
  
-{
-    `"PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"],
-    "PlayerStarting": "OneOfTheAboveGuidPlayerIds",
-    "Draw": false,
-    "Completed": false,
-    "Victor": null,
-    "BoardList": [5,5,5,5,5,5,5,5,5]`
+{ <br />
+    `"PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"], <br />
+    "PlayerStarting": "OneOfTheAboveGuidPlayerIds", <br />
+    "Draw": false, <br />
+    "Completed": false, <br />
+    "Victor": null, <br />
+    "BoardList": [5,5,5,5,5,5,5,5,5]` <br />
 }
 
 
@@ -39,17 +39,16 @@ The Move endpoint: http://localhost:6902/api/Game/move allows a player to place 
 |0|1|2|
 |--|--|--| 
 |3|4|5|
-|--|--|--| 
 |6|7|8|
 
 - Because of this, numbers outside the range of 0-8 will cause an Exception to be thrown so please keep the TileSelected to within that range.
 
 - When calling the move endpoint a JSOn string needs to be in the body in the format of:
 
-{ 
-   `"GameId": "gameIdDesired",
-   "PlayerId": "playerIdWhosTurnItIs",
-   "TileSelected": IntRelatingTOTileLocation`
+{ <br />
+   `"GameId": "gameIdDesired", <br />
+   "PlayerId": "playerIdWhosTurnItIs", <br />
+   "TileSelected": IntRelatingTOTileLocation`<br />
 }
 
 ## **Endpoint 3: GetActiveGames**
