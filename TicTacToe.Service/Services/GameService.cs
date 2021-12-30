@@ -10,6 +10,7 @@ using TicTacToe.Models.VMs.GameVMs;
 using TicTacToe.Models.VMs.MoveVMs;
 using TicTacToe.Repository.Repositories.Interfaces;
 using TicTacToe.Service.Interfaces;
+using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Service.Services
 {
@@ -108,14 +109,14 @@ namespace TicTacToe.Service.Services
         }
 
         // The Move Endpoint for Endpoint 2 of the project
-        // Has the current player choose a tile to mark
+        // Has the current player choose a tile to mark (including exceptions should they choose either their player or Tile incorrectly)
         public async Task<MoveVM> Move(MoveCreateVM inputtedSrc)
         {
             // If the tile that the move is for is non-valid ( # < 0 || # > 8) retern an exception
             if(inputtedSrc.TileSelected < 0 || inputtedSrc.TileSelected > 8)
             {
-                // Throw an exception, needs to be added yet
-                // throw new insertException("The selected tile is invalid, select a tile placement between 0 (top-left) and 8 (bottom-right)")
+                // Throw an exception, the TileSelected needs to be within acceptable ranges
+                throw new InvalidMove("The selected tile is invalid, select a tile placement between 0 (top-left) and 8 (bottom-right)");
             }
 
             // Get the Game the move is for from the Database
@@ -124,8 +125,8 @@ namespace TicTacToe.Service.Services
             // Determine whether the game has been won already (error/exception catching)
             if(result.Completed == true)
             {
-                // Throw an exception, needs to be added still
-                // throw new insertException("This game has already been completed, you can't take another move.")
+                // Throw an exception, you can't make a move if the game is already over
+                throw new InvalidMove("This game has already been completed, you can't take another move.");
             }
 
             // Determine which player gets to go: true = p1s turn, false = p2s turn
@@ -139,8 +140,8 @@ namespace TicTacToe.Service.Services
             // If the tile chosen is not 3 it isn't a valid move
             if (result.BoardList[inputtedSrc.TileSelected] != 3)
             {
-                // Throw an exception, needs to be added still
-                //throw new insertanInvalidMoveExceptionHere("The selected Tile is not available for a move");
+                // Throw an exception, you can't select a tile that has already been used
+                throw new InvalidMove("The selected Tile is not available for a move");
             }
 
             // Add a mark to the boardList (Getting here means it was a valid move)
@@ -213,8 +214,8 @@ namespace TicTacToe.Service.Services
             // Is the player we pass in from the inputtedSrc a valid player in this game?
             if (game.GameHubs.FirstOrDefault(i => i.PlayerId == playerId) == null)
             {
-                // Add Exception here (no exceptions implemented yet)
-                // throw new NotFoundException("The requested player is not found for this game");
+                // Add Exception here, if the requested player is not related to this game they can't participate (no randoms joining in)
+                throw new NotFoundException("The requested player has not been found related to this game");
             }
             // Determine if the passed in player is P1 
             if (game.PlayerStarting == playerId)
@@ -222,10 +223,8 @@ namespace TicTacToe.Service.Services
                 // If they are P1, determine if it is their turn
                 if (playerGoing == false)
                 {
-                    // Add Exception here (no exceptions implemented yet)
-
                     // If the player passed in is P1 but isn't the playerGoing then this isn't thier turn and they can't go, return exception
-                    //throw new insertanInvalidMoveExceptionHere("It is not the requested players turn");
+                    throw new InvalidMove("It is not the requested players turn");
                 }
                 // If the passed in player is P1 and the playerGoing indicates it is P1s turn, then return 1 (P1s mark)
                 else return 1;
@@ -233,9 +232,9 @@ namespace TicTacToe.Service.Services
             // If we reach this part of the method then the Player is P2
             if (playerGoing == true)
             {
-                // Add an Exception here (no exception implementations yet)
-                // If the playerGoing is true then it is P1s turn, therefore it isn't the passed in players turn. Return an exception.
-                // throw new insertanInvalidMoveExceptionHere("It is not the requested players turn");
+                // If the playerGoing is true then it is P1s turn,  however, we shouldn't have reached this if it was P1s turn,
+                // therefore it isn't the passed in players turn. Return an exception.
+                throw new InvalidMove("It is not the requested players turn");
             }
             // If the passed in player is P2 and the playerGoing indicates it is P2s turn, then retunr 2 (P2s mark)
             return 2;
