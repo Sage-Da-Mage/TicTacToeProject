@@ -33,7 +33,11 @@ namespace TicTacToe.Api.Controllers
         }
 
 
-        ///Create a new game 
+        /// <summary>
+        /// Create a new game 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost("create")]
         public async Task<ActionResult<GameVM>> Create([FromBody] GameCreateVM data)
         {
