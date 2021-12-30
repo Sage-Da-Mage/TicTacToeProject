@@ -28,8 +28,11 @@ namespace TicTacToe.Service.Interfaces
         // Get all of the Games currently existing
         public Task<List<GameVM>> GetAll();
 
+        // This method lets a user play a move in the game
         public Task<MoveVM> Move(MoveCreateVM inputtedSrc);
 
+        // This method Gets all the active (non-complete) games as well as gather information about the players.
+        public Task<List<ActiveGameVM>> GetActiveGames(int pageNumber, int setsPerPage);
 
     }
 }

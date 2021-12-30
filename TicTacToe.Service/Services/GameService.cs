@@ -192,7 +192,53 @@ namespace TicTacToe.Service.Services
 
         }
 
+        // This is the buisiness logic which is called to return a list of currently running games as well as the number of moves each player has taken in those games
+        // Passed in numbers are for handling blocks of the list at a time, there could theoretically be thousands of games and they would havbe to be brocken up somehow.
+        public async Task<List<ActiveGameVM>> GetActiveGames(int pageNumber, int setsPerPage)
+        {
+            // Get the list of all active games from the repository layer (allocated by page)
+            var results = await _gameRepository.GetActiveGames(pageNumber, setsPerPage);
 
+            // Generate a list to hold all the VMs gathered
+            var models = new List<ActiveGameVM>();
+
+            // For every Game gotten from the repository layer: convert it into an ActiveGameVM and add it to the models list for returning later 
+            foreach(Game game in results)
+            {
+                // get the first players Name
+
+                // Set a single Game into the model Variable
+                var model = new ActiveGameVM(game.Id);
+
+                // Find the name of the starting Player
+                Guid P1 = game.PlayerStarting;
+                
+                // Set xMark to be the game matching the passed in PlayerId from results
+                var xMark = game.GameHubs.Where(ps => ps.PlayerId == P1).FirstOrDefault();
+
+                // Set the name of the startingPlayer to be the name of the firstPlayer associated with the game focused on in this loop
+                model.StartingPlayerName = xMark.Player.Name;
+
+
+                // Find the second Players Name
+
+                // Set oMark to be the player that is associated with the game of this loop that isn't the first player
+                var oMark = game.GameHubs.Where(pt => pt.PlayerId != P1).FirstOrDefault();
+
+                // Set the name of the second Player to be the name of the secondPlayer associated with the game focused on in this iteration of the loop
+                model.Player2 = oMark.Player.Name;
+
+                // Count the moves done by both players
+                model.Player1MoveCount = game.BoardList.Count(x => x == 1);
+                model.Player2MoveCount = game.BoardList.Count(o => o == 2);
+
+                // Add the model generated in this iteration of the loop to the List of ActivGameVMs
+                models.Add(model);
+            }
+            // Now that the looping is over, return the list of ActiveGameVMs to the controller.
+            return models;
+
+        }
 
         // -------------------------------------------------------------------------------------------------------------------
         // Below are supplemental methods used in the above methods that are called from endpoints. 

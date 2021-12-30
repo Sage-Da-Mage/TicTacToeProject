@@ -98,21 +98,21 @@ namespace TicTacToe.Api.Controllers
 
 
 
-        /*
+        
         // Get the number of games currently active (not completed)
-        [HttpGet]
-        public async Task<List<GameVM>> GetAllActiveGames()
+        [HttpGet("current")]
+        public async Task<List<ActiveGameVM>> GetActiveGames([FromQuery] int pageNumber, int setsPerPage)
         {
             // The guts of the GetAll endpoint, make a call to the service layer to do the 
             // mechanics of getting every game in the database and then sorting out any non-active
             // game from that list
 
-            var results = await _gameService.GetAllActiveGames();
+            var results = await _gameService.GetActiveGames(pageNumber, setsPerPage);
 
             return results;
 
         }
-        */
+        
 
     }
 }

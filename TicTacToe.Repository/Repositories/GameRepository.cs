@@ -98,6 +98,28 @@ namespace TicTacToe.Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
+        // This functions to organize the games pulled from the database so that they are comprehensible when acessed at the service layer.
+        public async Task<List<Game>> GetActiveGames(int pageNumber, int setsPerPage)
+        {
+            // Get the list of games from the database:
+            var result = await _context.Games
+                // Where the game has an empty Tile (ie there is no victor or draw yet)
+                .Where(game => game.BoardList.Contains(5) && game.Victor == null && game.Draw != true)
+
+                // Get the players associated with the game as well via the GameHubs
+                .Include(game => game.GameHubs).ThenInclude(gp => gp.Player)
+
+                // Order the games by the time they were created at (why not/helps with organization)
+                .OrderBy(game => game.CreatedAt)
+                
+                // And take the ones matching the block of data associated with the inputted pageNumber/# of sets per page
+                .Skip((pageNumber - 1) * setsPerPage).Take(setsPerPage)
+                .ToListAsync();
+
+            // Return the results to the service layer.
+            return result;
+
+        }
 
     }
 }

@@ -20,5 +20,12 @@ namespace TicTacToe.Repository.Repositories.Interfaces
 
         Task Delete(Guid inputId);                          // Delete a specific Game
 
+
+
+        // Gathers a series of Games/Players based on the criteria that they are still running
+        // + a bunch of other organizational restrictions
+        public Task<List<Game>> GetActiveGames(int pageNumber, int setsPerPage);
+
+
     }
 }
