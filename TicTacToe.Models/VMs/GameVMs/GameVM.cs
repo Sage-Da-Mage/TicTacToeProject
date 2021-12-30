@@ -9,7 +9,7 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
 {
 
     // The View Model for the Game Entity, used for the creation and viewing of Game Entities
-    public class GameVM : BasicEntity
+    public class GameVM
     {
         // This is the default constructor for generating empty GameVMs
         public GameVM ()
@@ -18,15 +18,21 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
         }
 
         // This is the constructor for creating a GameVM from a Game Entity
-        public GameVM(Entities.Game src)
+        public GameVM(Game src)
         {
-            
+            GameId = src.Id;
+            PlayersIds = src.GameHubs.Select(Id => Id.PlayerId).ToList();
+
+            /*
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
             BoardList = src.BoardList;
+            */
         }
 
+        /* Removing this from the VM to match the desired return type of the Endpoint 
+         * 
         // The bool that returns true in the case that the game ends in a draw
         public bool Draw { get; set; }
 
@@ -40,7 +46,12 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
 
         // The Board that this specific game takes place on
         public List<int> BoardList { get; set; }
+        */
 
+        // The List of players (Ids) that are associated with this game (max/min 2)
+        public List<Guid> PlayersIds { get; set; }
 
+        // A temporary holding for the Id of a game being passed in 
+        public Guid GameId { get; set; }
     }
 }

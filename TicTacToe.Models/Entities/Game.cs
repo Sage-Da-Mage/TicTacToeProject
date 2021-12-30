@@ -19,6 +19,9 @@ namespace TicTacToe.Models.Entities
         // This constructor takes in a GameCreateVM to construct a Game
         public Game(GameCreateVM src )
         {
+            GameHubs = src.PlayersIds.Select(Id => new GameHub { PlayerId = Id }).ToList();
+            PlayerStarting = src.PlayerStarting;
+
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
@@ -29,6 +32,8 @@ namespace TicTacToe.Models.Entities
         // This constructor takes in a GameUpdateVM to update a Game
         public Game(GameUpdateVM src)
         {
+
+
             Draw = src.Draw;
             Completed = src.Completed;
             Victor = src.Victor;
@@ -46,9 +51,6 @@ namespace TicTacToe.Models.Entities
 
         // Below are the properties of a Game Entity
 
-        // Id for differenciating games (having issues with using BasicEntity)
-        //[Key]
-        //public Guid Id { get; set; }
 
 
         // The bool that returns true in the case that the game ends in a draw
@@ -66,9 +68,15 @@ namespace TicTacToe.Models.Entities
         public Player? Victor { get; set; }
 
         // The Board that this specific game takes place on
+        // A 3x3 set of tiles represented by numbers in a list of 9 ints
+        // 1= player 1, 2= player 2 & 3 = unused tile
         public List<int> BoardList { get; set; }
+
+        // The player (their Id) assigned to start the game of TicTacToe 
+        public Guid PlayerStarting { get; set; }
         
-        
+        // The collection of Player and Game info (navigation property)
+        public ICollection<GameHub> GameHubs { get; set; }
 
     }
 }

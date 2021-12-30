@@ -11,6 +11,17 @@ namespace TicTacToe.Models.VMs.GameVMs
     // The VM that is used to create a GameVM
     public class GameCreateVM : BasicEntity
     {
+       
+        
+
+        // The list of players associated with this game (2 max/min)
+        [Required]
+        public List<Guid> PlayersIds { get; set; }
+
+        // The player assigned to go first
+        public Guid PlayerStarting { get; set; }
+
+        
         // The boolean to indicate if a draw was reached
         [Required]
         public bool Draw { get; set; }
@@ -25,7 +36,6 @@ namespace TicTacToe.Models.VMs.GameVMs
         // The board that this game is set on.
         [Required]
         public List<int> BoardList { get; set; }
-
 
     }
 }
