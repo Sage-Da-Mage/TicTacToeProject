@@ -43,7 +43,7 @@ The Move endpoint: http://localhost:6902/api/Game/move allows a player to place 
 
 - Because of this, numbers outside the range of 0-8 will cause an Exception to be thrown so please keep the TileSelected to within that range.
 
-- When calling the move endpoint a JSOn string needs to be in the body in the format of:
+- When calling the move endpoint a JSON string needs to be in the body in the format of:
 
 { <br />
    `"GameId": "gameIdDesired",` <br />
