@@ -20,7 +20,6 @@ namespace TicTacToe.Models.VMs.GameVMs
         public bool Completed { get; set; }
 
         // The Player that won the game, null if the game isn't completed yet.
-        [Required]
         public Player? Victor { get; set; }
 
         // The board that this game is set on.

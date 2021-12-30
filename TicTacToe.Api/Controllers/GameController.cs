@@ -24,7 +24,7 @@ namespace TicTacToe.Api.Controllers
 
 
         // Create a new game 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<GameVM>> Create([FromBody] GameCreateVM data)
         {
             // The guts of the Create endpoint, make a call to the service layer to do the 
@@ -51,7 +51,7 @@ namespace TicTacToe.Api.Controllers
         }
 
         // Get all games
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<List<GameVM>> GetAll()
         {
             // The guts of the GetAll endpoint, make a call to the service layer to do the 

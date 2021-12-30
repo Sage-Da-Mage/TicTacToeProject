@@ -8,8 +8,8 @@ services:
       dockerfile: TicTacToe.Api/Dockerfile
     
     ports:
-     - "32000:80"
-     - "32005:480"
+     - "6902:80"
+     - "6905:480"
 
     environment:
      - ConnectionStrings__DefaultConnection=Server=TTT.db;Database=devdb;User Id=devdbuser;Password=devdbpassword

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using TicTacToe.Repository;
 using TicTacToe.Repository.Repositories;
 using TicTacToe.Repository.Repositories.Interfaces;
+using TicTacToe.Service.Interfaces;
 using TicTacToe.Service.Services;
 
 namespace TicTacToe.Api
@@ -29,12 +30,10 @@ namespace TicTacToe.Api
 
         public void ConfigureDependencyInjection(IServiceCollection services)
         {
-            // Configure Dependency Injection
-            services.AddScoped<GameService, GameService>();
+            services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepository, GameRepository>();
-
-
         }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -65,11 +64,11 @@ namespace TicTacToe.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

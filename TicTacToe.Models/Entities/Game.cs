@@ -66,7 +66,9 @@ namespace TicTacToe.Models.Entities
         public Player? Victor { get; set; }
 
         // The Board that this specific game takes place on
-        public List<int> BoardList { get; set; }       
+        public List<int> BoardList { get; set; }
+        
+        
 
     }
 }

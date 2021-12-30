@@ -40,6 +40,8 @@ namespace TicTacToe.Service.Services
 
             // Set the creationDate for this game to be the current time
             newEntity.CreatedAt = DateTime.UtcNow;
+            // Set the lastUpdateTime as the same as the current time as it hasn't been updated yet
+            newEntity.LastUpdatedAt = newEntity.CreatedAt;
 
 
             // Use that data to create the new Game
