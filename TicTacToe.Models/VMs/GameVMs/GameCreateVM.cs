@@ -8,32 +8,46 @@ using TicTacToe.Models.Entities;
 
 namespace TicTacToe.Models.VMs.GameVMs
 {
-    // The VM that is used to create a GameVM
+    /// <summary>
+    /// The VM that is used to create a GameVM
+    /// </summary>
     public class GameCreateVM : BasicEntity
     {
-       
-        
 
-        // The list of players associated with this game (2 max/min)
+
+
+        /// <summary>
+        /// The list of players associated with this game (2 max/min)
+        /// </summary>
         [Required]
         public List<Guid> PlayersIds { get; set; }
 
-        // The player assigned to go first
+        /// <summary>
+        /// The player assigned to go first
+        /// </summary>
         public Guid PlayerStarting { get; set; }
 
-        
-        // The boolean to indicate if a draw was reached
+
+        /// <summary>
+        /// The boolean to indicate if a draw was reached
+        /// </summary>
         [Required]
         public bool Draw { get; set; }
 
-        // The boolean to indicate if the game has been completed yet.
+        /// <summary>
+        /// The boolean to indicate if the game has been completed yet.
+        /// </summary>
         [Required]
         public bool Completed { get; set; }
 
-        // The Player that won the game, null if the game isn't completed yet.
+        /// <summary>
+        /// The Player that won the game, null if the game isn't completed yet.
+        /// </summary>
         public Guid? Victor { get; set; }
 
-        // The board that this game is set on.
+        /// <summary>
+        /// The board that this game is set on.
+        /// </summary>
         [Required]
         public List<int> BoardList { get; set; }
 

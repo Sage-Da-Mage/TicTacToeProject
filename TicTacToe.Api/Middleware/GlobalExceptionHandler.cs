@@ -9,16 +9,28 @@ using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Api.Middleware
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GlobalExceptionHandler
     {
 
         private readonly RequestDelegate _next;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="next"></param>
         public GlobalExceptionHandler(RequestDelegate next)
         {
             _next = next;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
             try

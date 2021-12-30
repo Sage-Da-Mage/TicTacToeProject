@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Models.VMs.PlayerVMs
 {
+    /// <summary>
+    /// The VM that creates a player.
+    /// </summary>
     public class PlayerCreateVM
     {
-        // A players Name, the remaining properties will be filled in outside a PlayerCreateVM
+        /// <summary>
+        /// A players Name, the remaining properties will be filled in outside a PlayerCreateVM
+        /// </summary>
         public string Name { get; set; }
 
     }

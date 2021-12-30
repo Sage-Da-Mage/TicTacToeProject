@@ -8,25 +8,34 @@ using TicTacToe.Models.Entities;
 
 namespace TicTacToe.Models.VMs.GameVMs
 {
-    // The difference beteween an UpdateVM and CreateVM is that 
-    // the UpdateVm does not have unchangable properties. 
+    /// <summary>
+    /// The difference beteween an UpdateVM and CreateVM is that the UpdateVm does not have unchangable properties. 
+    /// </summary>
     public class GameUpdateVM : BasicEntity
     {
         // The properties of a Game
 
-        // The boolean to indicate if a draw was reached
+        /// <summary>
+        /// The boolean to indicate if a draw was reached
+        /// </summary>
         [Required]
         public bool Draw { get; set; }
 
-        // The boolean to indicate if the game has been completed yet.
+        /// <summary>
+        /// The boolean to indicate if the game has been completed yet
+        /// </summary>
         [Required]
         public bool Completed { get; set; }
 
-        // The Player that won the game, null if the game isn't completed yet.
+        /// <summary>
+        /// The Player that won the game, null if the game isn't completed yet
+        /// </summary>
         [Required]
         public Guid? Victor { get; set; }
 
-        // The board that this game is set on.
+        /// <summary>
+        /// The board that this game is set on.
+        /// </summary>
         [Required]
         public List<int> BoardList { get; set; }
 

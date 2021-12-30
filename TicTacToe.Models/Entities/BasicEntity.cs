@@ -7,18 +7,25 @@ using System.Threading.Tasks;
 
 namespace TicTacToe.Models.Entities
 {
-    // This is the basic entity class which shows the properties all Entities posses
+    /// <summary>
+    /// This is the basic entity class which shows the properties all Entities posses
+    /// </summary>
     public abstract class BasicEntity
     {
-        // The Id of the Entity, used to differenciate
-        // between entities/pick out specific entities in endpoints
+        /// <summary>
+        /// The Id of the Entity, used to differenciate entities/pick out specific entities in endpoints
+        /// </summary>
         [Key]
         public Guid Id { get; set; }
 
-        // The DateTime which the entity was created at
+        /// <summary>
+        /// The DateTime which the entity was created at
+        /// </summary>
         public DateTime CreatedAt { get; set; }
 
-        // The DateTime which the entity was updated
+        /// <summary>
+        /// The DateTime which the entity was updated
+        /// </summary>
         public DateTime LastUpdatedAt { get; set; }
 
 

@@ -8,16 +8,23 @@ using System.Threading.Tasks;
 namespace TicTacToe.Models.Entities.VMs.GameVMs
 {
 
-    // The View Model for the Game Entity, used for the creation and viewing of Game Entities
+    /// <summary>
+    /// The View Model for the Game Entity, used for the creation and viewing of Game Entities
+    /// </summary>
     public class GameVM
     {
-        // This is the default constructor for generating empty GameVMs
+        /// <summary>
+        /// This is the default constructor for generating empty GameVMs
+        /// </summary>
         public GameVM ()
         {
 
         }
 
-        // This is the constructor for creating a GameVM from a Game Entity
+        /// <summary>
+        /// This is the constructor for creating a GameVM from a Game Entity
+        /// </summary>
+        /// <param name="src"></param>
         public GameVM(Game src)
         {
             GameId = src.Id;
@@ -48,10 +55,14 @@ namespace TicTacToe.Models.Entities.VMs.GameVMs
         public List<int> BoardList { get; set; }
         */
 
-        // The List of players (Ids) that are associated with this game (max/min 2)
+        /// <summary>
+        /// The List of players (Ids) that are associated with this game (max/min 2)
+        /// </summary>
         public List<Guid> PlayersIds { get; set; }
 
-        // A temporary holding for the Id of a game being passed in 
+        /// <summary>
+        /// A temporary holding for the Id of a game being passed in 
+        /// </summary>
         public Guid GameId { get; set; }
     }
 }

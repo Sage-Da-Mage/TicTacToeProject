@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicTacToe.Models</name>
+    </assembly>
+    <members>
+        <member name="T:TicTacToe.Models.Entities.BasicEntity">
+            <summary>
+            This is the basic entity class which shows the properties all Entities posses
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.BasicEntity.Id">
+            <summary>
+            The Id of the Entity, used to differenciate entities/pick out specific entities in endpoints
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.BasicEntity.CreatedAt">
+            <summary>
+            The DateTime which the entity was created at
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.BasicEntity.LastUpdatedAt">
+            <summary>
+            The DateTime which the entity was updated
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.Game">
+            <summary>
+            The Game is the class which the playing of Tic Tac Toe is done in. It inheriets an Id, CreatedAT and LastUpdatedAt properties from the BasicEntity
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Game.#ctor">
+            <summary>
+            The Empty constructor used for creating an empty Game Entity
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Game.#ctor(TicTacToe.Models.VMs.GameVMs.GameCreateVM)">
+            <summary>
+            This constructor takes in a GameCreateVM to construct a Game
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Game.#ctor(TicTacToe.Models.VMs.GameVMs.GameUpdateVM)">
+            <summary>
+            This constructor takes in a GameUpdateVM to update a Game
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Game.IsCompleted">
+            <summary>
+            Return the completed variable (for once a game is completed)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.Draw">
+            <summary>
+            The bool that returns true in the case that the game ends in a draw
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.Completed">
+            <summary>
+            The bool that returns true once the game is over,
+            either in the victory of a Player or in a draw
+            (This is important for later endpoints where we check for current games played)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.Victor">
+            <summary>
+            The player that wins the game (gotten via Id)
+            (not necessarily going to exist in all games as some will end in a draw [no winner])
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.BoardList">
+            <summary>
+            The Board that this specific game takes place on
+            A 3x3 set of tiles represented by numbers in a list of 9 ints
+            1= player 1, 2= player 2 and 5 = unused tile
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.PlayerStarting">
+            <summary>
+            The player (their Id) assigned to start the game of TicTacToe
+            </summary>        
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Game.GameHubs">
+            <summary>
+            The collection of Player and Game info (navigation property)
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.GameHub">
+            <summary>
+            This class exists to put Player and Game Entities associated with each other into a single location for ease of acess.
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.GameHub.GameId">
+            <summary>
+            The Id of the game itself
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.GameHub.PlayerId">
+            <summary>
+            The Id of a specific Player
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.GameHub.Player">
+            <summary>
+            The navigation property for a player
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.GameHub.Game">
+            <summary>
+            The navigation property for a Game
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.Player">
+            <summary>
+            This Entity represents a player of TicTacToe
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Player.#ctor">
+            <summary>
+            An empty constructor for the creation of an empty Player Entity
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.Player.#ctor(TicTacToe.Models.VMs.PlayerVMs.PlayerCreateVM)">
+            <summary>
+            A constructor to generate a Player from a PlayerCreateVM Entity
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Player.Name">
+            <summary>
+            This is the name of the Player
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.Player.GameHubs">
+            <summary>
+            The Games that this player is associated with (through GameHub)
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.VMs.GameVMs.GameVM">
+            <summary>
+            The View Model for the Game Entity, used for the creation and viewing of Game Entities
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.GameVMs.GameVM.#ctor">
+            <summary>
+            This is the default constructor for generating empty GameVMs
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.GameVMs.GameVM.#ctor(TicTacToe.Models.Entities.Game)">
+            <summary>
+            This is the constructor for creating a GameVM from a Game Entity
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.VMs.GameVMs.GameVM.PlayersIds">
+            <summary>
+            The List of players (Ids) that are associated with this game (max/min 2)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.VMs.GameVMs.GameVM.GameId">
+            <summary>
+            A temporary holding for the Id of a game being passed in 
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.VMs.MoveVMs.MoveVM">
+            <summary>
+            The View Model for the Move Entity, used for the viewing of Move Entities 
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.MoveVMs.MoveVM.#ctor">
+            <summary>
+            The empty Constructor for the generation of empty MoveVMs
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.MoveVMs.MoveVM.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            The constructor for generating a moveVM model
+            </summary>
+            <param name="gameCompleted"></param>
+            <param name="winningTurn"></param>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.VMs.MoveVMs.MoveVM.GameCompleted">
+            <summary>
+            Determines if the game is over, this is true if there is a victor or if there is a draw
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.VMs.MoveVMs.MoveVM.WinningTurn">
+            <summary>
+            The winning turn is true if a player wins the game with this turn
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.Entities.VMs.PlayerVMs.PlayerVM">
+            <summary>
+            The View Model for the Player Entity, used for the creation and viewing of Player Entities
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.PlayerVMs.PlayerVM.#ctor">
+            <summary>
+            The constructor for generating an empty PlayerVM
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.Entities.VMs.PlayerVMs.PlayerVM.#ctor(TicTacToe.Models.Entities.Player)">
+            <summary>
+            The constructor for generating a PlayerVM model from a Player Entity
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="P:TicTacToe.Models.Entities.VMs.PlayerVMs.PlayerVM.Name">
+            <summary>
+            This is the name of the Player
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.GameStatsVM">
+            <summary>
+            This class holds stats regarding a game (specifically the number of moves players have made)
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.VMs.GameStatsVM.#ctor">
+            <summary>
+            The standard empty constructor for generating empty GameStatsVM entities
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameStatsVM.GameId">
+            <summary>
+            The Id belonging to the game which this entitiy is associated with
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameStatsVM.StartingPlayer">
+            <summary>
+            The name of the starting player (Player1)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameStatsVM.Player2">
+            <summary>
+            The name of the second player (Player2)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameStatsVM.Player1MoveCount">
+            <summary>
+            The number of moves completed by Player1
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameStatsVM.Player2MoveCount">
+            <summary>
+            The number of moves completed by Player2
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.GameVMs.ActiveGameVM">
+            <summary>
+            This class is used for showing the games that are currently active as well as for counting the number
+            of moves each player has used in that game
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.#ctor">
+            <summary>
+            The default constructor for generating an empty ActiveGameVm entity
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.#ctor(System.Guid)">
+            <summary>
+            The constructor for generating an ActiveGameVM from a gameId
+            </summary>
+            <param name="gameId"></param>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.Id">
+            <summary>
+            The Id is what allows us to differenciate and identify specific ActiveGameVMs
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.StartingPlayerName">
+            <summary>
+            The name for the Player that starts the game off
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.Player1MoveCount">
+            <summary>
+            The number of moves completed by the starting player (P1)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.Player2">
+            <summary>
+            The name for the player that goes second
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.ActiveGameVM.Player2MoveCount">
+            <summary>
+            The number of moves that the second player has taken
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.GameVMs.GameCreateVM">
+            <summary>
+            The VM that is used to create a GameVM
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.PlayersIds">
+            <summary>
+            The list of players associated with this game (2 max/min)
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.PlayerStarting">
+            <summary>
+            The player assigned to go first
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.Draw">
+            <summary>
+            The boolean to indicate if a draw was reached
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.Completed">
+            <summary>
+            The boolean to indicate if the game has been completed yet.
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.Victor">
+            <summary>
+            The Player that won the game, null if the game isn't completed yet.
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameCreateVM.BoardList">
+            <summary>
+            The board that this game is set on.
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.GameVMs.GameUpdateVM">
+            <summary>
+            The difference beteween an UpdateVM and CreateVM is that the UpdateVm does not have unchangable properties. 
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameUpdateVM.Draw">
+            <summary>
+            The boolean to indicate if a draw was reached
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameUpdateVM.Completed">
+            <summary>
+            The boolean to indicate if the game has been completed yet
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameUpdateVM.Victor">
+            <summary>
+            The Player that won the game, null if the game isn't completed yet
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.GameVMs.GameUpdateVM.BoardList">
+            <summary>
+            The board that this game is set on.
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.MoveVMs.MoveCreateVM">
+            <summary>
+            The VM for creating a MoveVM
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.MoveVMs.MoveCreateVM.GameId">
+            <summary>
+            The Id of the Game the move is set for
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.MoveVMs.MoveCreateVM.PlayerId">
+            <summary>
+            The player who is making the move
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.MoveVMs.MoveCreateVM.TileSelected">
+            <summary>
+            The tile which the move is done upon (arranged as 3 rows of integers 0-2, 3-5, 6-8) [INVALID IF NUMBERPASSEDIN greater than 8 || NUMBERPASSEDIN less than 0]
+            </summary>
+        </member>
+        <member name="T:TicTacToe.Models.VMs.PlayerVMs.PlayerCreateVM">
+            <summary>
+            The VM that creates a player.
+            </summary>
+        </member>
+        <member name="P:TicTacToe.Models.VMs.PlayerVMs.PlayerCreateVM.Name">
+            <summary>
+            A players Name, the remaining properties will be filled in outside a PlayerCreateVM
+            </summary>
+        </member>
+    </members>
+</doc>

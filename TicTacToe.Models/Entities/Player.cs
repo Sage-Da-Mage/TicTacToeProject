@@ -7,17 +7,24 @@ using TicTacToe.Models.VMs.PlayerVMs;
 
 namespace TicTacToe.Models.Entities
 {
-    // This Entity represents a player of TicTacToe
+    /// <summary>
+    /// This Entity represents a player of TicTacToe
+    /// </summary>
     public class Player : BasicEntity
     {
 
-        // An empty constructor for the creation of an empty Player Entity
+        /// <summary>
+        /// An empty constructor for the creation of an empty Player Entity
+        /// </summary>
         public Player()
         {
 
         }
 
-        // A constructor to generate a Player from a PlayerCreateVM Entity
+        /// <summary>
+        /// A constructor to generate a Player from a PlayerCreateVM Entity
+        /// </summary>
+        /// <param name="src"></param>
         public Player(PlayerCreateVM src)
         {
             Name = src.Name;
@@ -26,10 +33,14 @@ namespace TicTacToe.Models.Entities
 
         // Below are the properties of a Player Entity
 
-        // This is the name of the Player
+        /// <summary>
+        /// This is the name of the Player
+        /// </summary>
         public string Name { get; set; }
 
-        // The Games that this player is associated with (through GmaeHub)
+        /// <summary>
+        /// The Games that this player is associated with (through GameHub)
+        /// </summary>
         public ICollection<GameHub> GameHubs { get; set; }
 
 

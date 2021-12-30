@@ -10,6 +10,9 @@ using TicTacToe.Service.Interfaces;
 
 namespace TicTacToe.Api.Controllers
 {
+    /// <summary>
+    /// The controler holding the endpoints related to players.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
@@ -17,12 +20,20 @@ namespace TicTacToe.Api.Controllers
         //Setting up acess to the service layer (not created for Player yet)
         private readonly IPlayerService _playerService;
 
+        /// <summary>
+        /// The constructor that gives us acess to the service layer.
+        /// </summary>
+        /// <param name="playerService"></param>
         public PlayerController(IPlayerService playerService)
         {
             _playerService = playerService;
         }
        
-
+        /// <summary>
+        /// This endpoint creates a player from the inputtedSrc, create two Players before trying to make a Game.
+        /// </summary>
+        /// <param name="inputtedSrc"></param>
+        /// <returns></returns>
         [HttpPost("Create")]
         public async Task<ActionResult<PlayerVM>> Create([FromBody] PlayerCreateVM inputtedSrc)
         {

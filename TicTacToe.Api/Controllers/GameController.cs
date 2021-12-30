@@ -13,20 +13,27 @@ using TicTacToe.Shared.Exceptions;
 
 namespace TicTacToe.Api.Controllers
 {
-    // This contoller has all of the endpoints directly related to/interacting with the Game Entity
+    /// <summary>
+    /// This contoller has all of the endpoints directly related to/interacting with the Game Entity
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
     {
 
         private readonly IGameService _gameService;
+        
+        /// <summary>
+        /// The Constructor which gives the GameController access to the service layer 
+        /// </summary>
+        /// <param name="gameService"></param>
         public GameController(IGameService gameService)
         {
             _gameService = gameService;
         }
 
 
-        // Create a new game 
+        ///Create a new game 
         [HttpPost("create")]
         public async Task<ActionResult<GameVM>> Create([FromBody] GameCreateVM data)
         {
@@ -54,7 +61,11 @@ namespace TicTacToe.Api.Controllers
         }
 
 
-        // Get a specific game by its Id
+        /// <summary>
+        ///  Get a specific game by its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<GameVM>> Get([FromRoute] Guid id)
         {
@@ -74,7 +85,11 @@ namespace TicTacToe.Api.Controllers
         }
 
 
-        // This endpoint takes in a MoveCreateVm (GameID + PlayerWhosTurnItIsId + Tile to select) 
+        /// <summary>
+        /// This endpoint takes in a MoveCreateVm (GameID + PlayerWhosTurnItIsId + Tile to select)
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>        
         [HttpPost]
         [Route("move")]
         public async Task<ActionResult<MoveVM>> Move([FromBody] MoveCreateVM data)
@@ -85,8 +100,13 @@ namespace TicTacToe.Api.Controllers
 
 
 
-        
-        // Get the number of games currently active (not completed)
+
+        /// <summary>
+        /// Get the number of games currently active (not completed)
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="setsPerPage"></param>
+        /// <returns></returns>
         [HttpGet("getCurrentlyActiveGames")]
         public async Task<List<ActiveGameVM>> GetActiveGames([FromQuery] int pageNumber, int setsPerPage)
         {
