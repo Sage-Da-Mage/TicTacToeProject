@@ -14,8 +14,6 @@ namespace TicTacToe.Repository.Repositories.Interfaces
 
         Task<Game> Get(Guid gameid);                        // Get a single Game by its Id
 
-        Task<List<Game>> GetAll();                          // Get all Games stored in the Database
-
         Task<Game> Update(Game src, Guid gameId);           // Update an existing Game
 
         Task Delete(Guid inputId);                          // Delete a specific Game

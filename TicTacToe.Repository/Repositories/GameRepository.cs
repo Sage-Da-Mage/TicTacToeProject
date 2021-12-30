@@ -46,15 +46,6 @@ namespace TicTacToe.Repository.Repositories
 
         }
 
-        // Get all of the Games in the database
-        public async Task<List<Game>> GetAll()
-        {
-            // Get all of the Game Entities
-            var results = await _context.Games.ToListAsync();
-
-            //Return the Game Entities retrieved from the above line
-            return results;
-        }
 
         // Update a currently existing Game
         public async Task<Game> Update(Game src, Guid inputId)

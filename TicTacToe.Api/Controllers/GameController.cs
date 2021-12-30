@@ -73,19 +73,6 @@ namespace TicTacToe.Api.Controllers
 
         }
 
-        // Get all games
-        [HttpGet("GetAll")]
-        public async Task<List<GameVM>> GetAll()
-        {
-            // The guts of the GetAll endpoint, make a call to the service layer to do the 
-            // mechanics of getting every game in the database
-
-            var results = await _gameService.GetAll();
-
-            return results;
-        }
-
-
 
         // This endpoint takes in a MoveCreateVm (GameID + PlayerWhosTurnItIsId + Tile to select) 
         [HttpPost]
@@ -100,7 +87,7 @@ namespace TicTacToe.Api.Controllers
 
         
         // Get the number of games currently active (not completed)
-        [HttpGet("current")]
+        [HttpGet("getCurrentlyActiveGames")]
         public async Task<List<ActiveGameVM>> GetActiveGames([FromQuery] int pageNumber, int setsPerPage)
         {
             // The guts of the GetAll endpoint, make a call to the service layer to do the 

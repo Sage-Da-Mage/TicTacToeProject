@@ -74,19 +74,6 @@ namespace TicTacToe.Service.Services
         }
         
 
-        // The call for getting all games within the database
-        public async Task<List<GameVM>> GetAll()
-        {
-            // Get the Game entities from the repository
-            var results = await _gameRepository.GetAll();
-
-            // Build the Game view models to return to the client
-            var models = results.Select(game => new GameVM(game)).ToList();
-
-            // Return the GameVMs
-            return models;
-        }
-
         public async Task<GameVM> Update(GameUpdateVM src, Guid inputId)
         {
 

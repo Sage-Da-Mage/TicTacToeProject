@@ -25,8 +25,6 @@ namespace TicTacToe.Service.Interfaces
         // Delete a Game
         Task Delete(Guid gameId);
 
-        // Get all of the Games currently existing
-        public Task<List<GameVM>> GetAll();
 
         // This method lets a user play a move in the game
         public Task<MoveVM> Move(MoveCreateVM inputtedSrc);
