@@ -19,14 +19,12 @@ Before you actually start a game itself, you are going to want to create some pl
  After doing this, you can create a game by using: http://localhost:6902/api/Game/Create with a JSON string in the body in the format of:
  
 ` {
-
     "PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"],
     "PlayerStarting": "OneOfTheAboveGuidPlayerIds",
     "Draw": false,
     "Completed": false,
     "Victor": null,
-    "BoardList": [5,5,5,5,5,5,5,5,5]
-    
+    "BoardList": [5,5,5,5,5,5,5,5,5] 
 } `
 
 
@@ -39,9 +37,9 @@ The Move endpoint: http://localhost:6902/api/Game/move allows a player to place 
 - The TicTacToe grid is formatted as a grid of integer with the locations being:
 
 0 | 1 | 2
-_________
+_ _ _ _ _ _ 
 3 | 4 | 5
-_________
+_ _ _ _ _ _ 
 6 | 7 | 8
 
 - Because of this, numbers outside the range of 0-8 will cause an Exception to be thrown so please keep the TileSelected to within that range.
