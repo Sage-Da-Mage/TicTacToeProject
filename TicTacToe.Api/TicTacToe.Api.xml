@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicTacToe.Api</name>
+    </assembly>
+    <members>
+        <member name="T:TicTacToe.Api.Controllers.GameController">
+            <summary>
+            This contoller has all of the endpoints directly related to/interacting with the Game Entity
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.GameController.#ctor(TicTacToe.Service.Interfaces.IGameService)">
+            <summary>
+            The Constructor which gives the GameController access to the service layer 
+            </summary>
+            <param name="gameService"></param>
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.GameController.Create(TicTacToe.Models.VMs.GameVMs.GameCreateVM)">
+            Create a new game 
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.GameController.Get(System.Guid)">
+            <summary>
+             Get a specific game by its Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.GameController.Move(TicTacToe.Models.VMs.MoveVMs.MoveCreateVM)">
+            <summary>
+            This endpoint takes in a MoveCreateVm (GameID + PlayerWhosTurnItIsId + Tile to select)
+            </summary>
+            <param name="data"></param>
+            <returns></returns>        
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.GameController.GetActiveGames(System.Int32,System.Int32)">
+            <summary>
+            Get the number of games currently active (not completed)
+            </summary>
+            <param name="pageNumber"></param>
+            <param name="setsPerPage"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TicTacToe.Api.Controllers.PlayerController">
+            <summary>
+            The controler holding the endpoints related to players.
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.PlayerController.#ctor(TicTacToe.Service.Interfaces.IPlayerService)">
+            <summary>
+            The constructor that gives us acess to the service layer.
+            </summary>
+            <param name="playerService"></param>
+        </member>
+        <member name="M:TicTacToe.Api.Controllers.PlayerController.Create(TicTacToe.Models.VMs.PlayerVMs.PlayerCreateVM)">
+            <summary>
+            This endpoint creates a player from the inputtedSrc, create two Players before trying to make a Game.
+            </summary>
+            <param name="inputtedSrc"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TicTacToe.Api.Middleware.GlobalExceptionHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Middleware.GlobalExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:TicTacToe.Api.Middleware.GlobalExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TicTacToe.Api.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Program.Main(System.String[])">
+            <summary>
+            The main of the program.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:TicTacToe.Api.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TicTacToe.Api.Startup">
+            <summary>
+            The Startup Class, where we configure Dependncy Injection, Swagger and middleware/exceptions.
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            The constructor that initializes the configuration
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:TicTacToe.Api.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TicTacToe.Api.Startup.ConfigureDependencyInjection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure Dependency Injection so that the layers can all interact as needed
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:TicTacToe.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            This method gets called by the runtime. Use this method to add services to the container.
+        </member>
+        <member name="M:TicTacToe.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        </member>
+    </members>
+</doc>

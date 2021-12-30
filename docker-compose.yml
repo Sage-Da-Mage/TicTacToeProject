@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  tictactoe.api:
+    image: ${DOCKER_REGISTRY-}tictactoeapi
+    build:
+      context: .
+      dockerfile: TicTacToe.Api/Dockerfile
+    
+    ports:
+     - "6902:80"
+     - "6905:480"
+
+    environment:
+     - ConnectionStrings__DefaultConnection=Server=TTT.db;Database=devdb;User Id=devdbuser;Password=devdbpassword
+    depends_on:
+     - TTT.db
+
+  TTT.db:
+   restart: on-failure
+   image: "postgis/postgis:13-3.1-alpine"
+   container_name: "TTT.db"
+   environment:
+    - POSTGRES_USER=devdbuser
+    - POSTGRES_DB=devdb
+    - POSTGRES_PASSWORD=devdbpassword
+   volumes:
+    - TTT-db:/var/lib/postgresql/data
+   ports:
+        - "44020:5432" 
+
+volumes:
+  TTT-db:
