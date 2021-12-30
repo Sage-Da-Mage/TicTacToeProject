@@ -10,7 +10,7 @@ namespace TicTacToe.Models.VMs.GameVMs
 {
     // The difference beteween an UpdateVM and CreateVM is that 
     // the UpdateVm does not have unchangable properties. 
-    public class GameUpdateVM
+    public class GameUpdateVM : BasicEntity
     {
         // The properties of a Game
 

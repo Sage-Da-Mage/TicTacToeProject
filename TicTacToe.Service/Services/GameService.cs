@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 using TicTacToe.Models.Entities;
 using TicTacToe.Models.Entities.VMs.GameVMs;
 using TicTacToe.Models.VMs.GameVMs;
+using TicTacToe.Repository.Repositories.Interfaces;
+using TicTacToe.Service.Interfaces;
 
 namespace TicTacToe.Service.Services
 {
 
-    public class GameService
+    public class GameService : IGameService
     {
-        // Structure for Game Repository implementation (not included yet).
-        /*public class GameService :IGameService
-        * {
-        *      private readonly IGameRepository _gameRepository;
-        * }
-        * 
-        * public GameService(IGameRepository gameRepository)
-        * {
-        *       _gameRepository = gameRepository;
-        * }
-        */
 
-        /*
+        private readonly IGameRepository _gameRepository;
+
+        public GameService(IGameRepository gameRepository)
+        {
+            _gameRepository = gameRepository;
+        }
+
         public async Task<GameVM> Create(GameCreateVM src)
         {
             // Generate a new Entity with the inputted data            
@@ -49,14 +46,14 @@ namespace TicTacToe.Service.Services
             var result = await _gameRepository.Create(newEntity);
 
             // Create a GameVM from the result to return/show
-            var model = new GameVM(result);
+            var model = new GameVM(newEntity);
 
             // Return the result as an GameVM
             return model;
         }
 
         // Get an Game by its GameId
-        /*public async Task<GameVM> Get(Guid gameId)
+        public async Task<GameVM> Get(Guid gameId)
         {
 
             // Get the Game entitiy from the repository
@@ -68,8 +65,8 @@ namespace TicTacToe.Service.Services
             // Return the Game VM in a 200 response
             return model;
 
-        }*/
-        /*
+        }
+        
 
         // Modified GetAll after switching to database implementation
         public async Task<List<GameVM>> GetAll()
@@ -84,13 +81,12 @@ namespace TicTacToe.Service.Services
             return models;
         }
 
-        public async Task<GameVM> Update(GameUpdateVM src)
+        public async Task<GameVM> Update(GameUpdateVM src, Guid inputId)
         {
 
             // Make the repository update the Game
             var updateData = new Game(src);
-
-            var result = await _gameRepository.Update(updateData);
+            var result = await _gameRepository.Update(updateData, inputId);
 
             //Create the GameVM model for returning to the client
             var model = new GameVM(result);
@@ -99,13 +95,10 @@ namespace TicTacToe.Service.Services
             return model;
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid inputId)
         {
             // Inform the repository to delete the specified Listing Entity
-            await _gameRepository.Delete(id);
+            await _gameRepository.Delete(inputId);
         }
-        */
-
-
     }
 }

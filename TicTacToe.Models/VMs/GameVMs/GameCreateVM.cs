@@ -9,7 +9,7 @@ using TicTacToe.Models.Entities;
 namespace TicTacToe.Models.VMs.GameVMs
 {
     // The VM that is used to create a GameVM
-    public class GameCreateVM
+    public class GameCreateVM : BasicEntity
     {
         // The boolean to indicate if a draw was reached
         [Required]

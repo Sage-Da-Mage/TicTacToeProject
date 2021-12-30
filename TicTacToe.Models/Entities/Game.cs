@@ -23,8 +23,7 @@ namespace TicTacToe.Models.Entities
             Completed = src.Completed;
             Victor = src.Victor;
             BoardList = src.BoardList;
-            // Set the time of the Games creation to the current time
-            CreatedAt = DateTime.UtcNow;
+
         }
 
         // This constructor takes in a GameUpdateVM to update a Game
@@ -34,8 +33,7 @@ namespace TicTacToe.Models.Entities
             Completed = src.Completed;
             Victor = src.Victor;
             BoardList = src.BoardList;
-            // Set the most recent update time to the current time
-            LastUpdatedAt = DateTime.UtcNow; 
+
         }
 
 

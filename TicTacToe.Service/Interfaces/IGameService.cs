@@ -15,21 +15,16 @@ namespace TicTacToe.Service.Interfaces
         Task<GameVM> Create(GameCreateVM src);
 
         //Get a single existing Game by its Id
-        Task<GameVM> Get(int id);
+        Task<GameVM> Get(Guid id);
 
         //Update a currently existing Game
-        Task<GameVM> Update(GameUpdateVM src, int EmployeeId);
+        Task<GameVM> Update(GameUpdateVM src, Guid inputId);
 
         // Delete a Game
-        Task Delete(int id);
-
-
+        Task Delete(Guid gameId);
 
         // Get all of the Games currently existing (CC required)
         public Task<List<GameVM>> GetAll();
-
-        // List all of the Games currently existing (CC required)
-        public Task<List<GameVM>> ListAll();
 
     }
 }
