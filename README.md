@@ -5,7 +5,7 @@
 
 This project allows those using it to create and play games of TicTacToe as well as to access information about games that have yet to be completed.
 
-You can make use of this project by cloning it from this GitHub page into your IDE of choice (though I used Visual Studio 2019 and would recommend you do it for the most consistency with my experience).
+You can make use of this project by cloning it from this GitHub page onto your computer and run it through your IDE of choice (though I used Visual Studio 2019 and would recommend you do it for the most consistency with my experience).
 
 
 ## **Endpoint 1: Starting A Game**
