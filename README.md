@@ -18,14 +18,14 @@ Before you actually start a game itself, you are going to want to create some pl
  
  After doing this, you can create a game by using: http://localhost:6902/api/Game/Create with a JSON string in the body in the format of:
  
-`{
-    "PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"],
+{
+    `"PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"],
     "PlayerStarting": "OneOfTheAboveGuidPlayerIds",
     "Draw": false,
     "Completed": false,
     "Victor": null,
-    "BoardList": [5,5,5,5,5,5,5,5,5] 
-}`
+    "BoardList": [5,5,5,5,5,5,5,5,5]`
+}
 
 
 ## **Endpoint 2: Move Implementation**
@@ -46,11 +46,11 @@ The Move endpoint: http://localhost:6902/api/Game/move allows a player to place 
 
 - When calling the move endpoint a JSOn string needs to be in the body in the format of:
 
-` { `
-   ` "GameId": "gameIdDesired",`
-   ` "PlayerId": "playerIdWhosTurnItIs",`
-    `"TileSelected": IntRelatingTOTileLocation`
-` } `
+{ 
+   `"GameId": "gameIdDesired",
+   "PlayerId": "playerIdWhosTurnItIs",
+   "TileSelected": IntRelatingTOTileLocation`
+}
 
 ## **Endpoint 3: GetActiveGames**
 
