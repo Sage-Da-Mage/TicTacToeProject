@@ -24,7 +24,7 @@ namespace TicTacToe.Service.Services
         * }
         */
 
-
+        /*
         public async Task<GameVM> Create(GameCreateVM src)
         {
             // Generate a new Entity with the inputted data            
@@ -41,10 +41,12 @@ namespace TicTacToe.Service.Services
             newEntity.Draw = false;
             newEntity.Victor = null;
 
+            // Set the creationDate for this game to be the current time
+            newEntity.CreatedAt = DateTime.UtcNow;
+
 
             // Use that data to create the new Game
-            var result = new Game(); 
-            //var result = await _gameRepository.Create(newEntity);
+            var result = await _gameRepository.Create(newEntity);
 
             // Create a GameVM from the result to return/show
             var model = new GameVM(result);
@@ -67,6 +69,7 @@ namespace TicTacToe.Service.Services
             return model;
 
         }*/
+        /*
 
         // Modified GetAll after switching to database implementation
         public async Task<List<GameVM>> GetAll()
@@ -101,7 +104,7 @@ namespace TicTacToe.Service.Services
             // Inform the repository to delete the specified Listing Entity
             await _gameRepository.Delete(id);
         }
-
+        */
 
 
     }

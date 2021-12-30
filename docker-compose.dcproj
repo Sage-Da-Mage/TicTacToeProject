@@ -5,7 +5,6 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>7319e94a-7a8f-44e9-83ba-f084ff1acdcb</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
     <DockerServiceName>tictactoe.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

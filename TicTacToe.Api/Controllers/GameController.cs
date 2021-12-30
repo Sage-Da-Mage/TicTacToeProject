@@ -13,7 +13,7 @@ namespace TicTacToe.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class GameController : ControllerBase
-    { 
+    {
         // A list of contexts to read in for use in the controller 
         // YET TO BE MADE/USED AS CONTEXTS DON'T EXIST YET
 
@@ -21,10 +21,12 @@ namespace TicTacToe.Api.Controllers
         // public GameController(INPUTS)
         // {
 
-            // _context = context 
-            // etc...
+        // _context = context 
+        // etc...
 
         // }
+
+        /*
 
         // Create a new game 
         [HttpPost]
@@ -78,5 +80,7 @@ namespace TicTacToe.Api.Controllers
             return results;
 
         }
+        */
+
     }
 }
