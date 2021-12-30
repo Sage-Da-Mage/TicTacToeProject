@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TicTacToe.Models.Entities.VMs.GameVMs;
 using TicTacToe.Models.VMs.GameVMs;
+using TicTacToe.Service.Interfaces;
 
 namespace TicTacToe.Api.Controllers
 {
@@ -14,19 +15,13 @@ namespace TicTacToe.Api.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        // A list of contexts to read in for use in the controller 
-        // YET TO BE MADE/USED AS CONTEXTS DON'T EXIST YET
 
-        // Constructor for taking in said contexts
-        // public GameController(INPUTS)
-        // {
+        private readonly IGameService _gameService;
+        public GameController(IGameService gameService)
+        {
+            _gameService = gameService;
+        }
 
-        // _context = context 
-        // etc...
-
-        // }
-
-        /*
 
         // Create a new game 
         [HttpPost]
@@ -67,6 +62,7 @@ namespace TicTacToe.Api.Controllers
             return results;
         }
 
+        /*
         // Get the number of games currently active (not completed)
         [HttpGet]
         public async Task<List<GameVM>> GetAllActiveGames()

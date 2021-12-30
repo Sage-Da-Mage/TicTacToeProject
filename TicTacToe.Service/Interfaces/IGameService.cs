@@ -8,7 +8,7 @@ using TicTacToe.Models.VMs.GameVMs;
 
 namespace TicTacToe.Service.Interfaces
 {
-    interface IGameService
+    public interface IGameService
     {
 
         // Create a new Game
