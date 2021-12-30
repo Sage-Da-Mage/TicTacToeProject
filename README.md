@@ -37,20 +37,20 @@ The Move endpoint: http://localhost:6902/api/Game/move allows a player to place 
 - The TicTacToe grid is formatted as a grid of integer with the locations being:
 
 0 | 1 | 2
-----------
+_________
 3 | 4 | 5
-----------
+_________
 6 | 7 | 8
 
 - Because of this, numbers outside the range of 0-8 will cause an Exception to be thrown so please keep the TileSelected to within that range.
 
 - When calling the move endpoint a JSOn string needs to be in the body in the format of:
 
-'{
+' {
     "GameId": "gameIdDesired",
     "PlayerId": "playerIdWhosTurnItIs",
     "TileSelected": IntRelatingTOTileLocation
-}'
+} '
 
 ## **Endpoint 3: GetActiveGames**
 
