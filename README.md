@@ -17,7 +17,8 @@ Before you actually start a game itself, you are going to want to create some pl
  - A Game requires two players to start a game so please make sure you have at least 2 players in the database before you try to start one.
  
  After doing this, you can create a game by using: http://localhost:6902/api/Game/Create with a JSON string in the body in the format of:
-'{
+ 
+` {
     "PlayersIds": ["GuidPlayerId", "GuidPlayer2Id"],
     "PlayerStarting": "OneOfTheAboveGuidPlayerIds",
 
@@ -25,7 +26,7 @@ Before you actually start a game itself, you are going to want to create some pl
     "Completed": false,
     "Victor": null,
     "BoardList": [5,5,5,5,5,5,5,5,5]
-}'
+} `
 
 
 ## **Endpoint 2: Move Implementation**
